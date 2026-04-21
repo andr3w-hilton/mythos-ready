@@ -411,11 +411,11 @@
     }
 
     function statusLabel(pct) {
-      if (pct < 20) return 'Critical';
+      if (pct < 20) return 'Not Ready';
       if (pct < 40) return 'Insufficient';
-      if (pct < 60) return 'Marginal';
-      if (pct < 80) return 'Moderate';
-      return 'Elevated';
+      if (pct < 60) return 'Developing';
+      if (pct < 80) return 'Adequate';
+      return 'Mythos Ready';
     }
 
     function randomId() {
