@@ -317,7 +317,7 @@
     const trackWidth = 30;
 
     function percentToAngle(pct) {
-      return Math.PI - (pct / 100) * Math.PI;
+      return Math.PI + (pct / 100) * Math.PI;
     }
 
     function gaugeColor(pct) {
@@ -350,7 +350,7 @@
         const p0 = (i / steps) * 100;
         const p1 = ((i + 1) / steps) * 100;
         ctx.beginPath();
-        ctx.arc(cx, cy, radius, percentToAngle(p0), percentToAngle(p1), true);
+        ctx.arc(cx, cy, radius, percentToAngle(p0), percentToAngle(p1), false);
         ctx.lineWidth = trackWidth;
         ctx.strokeStyle = gaugeColor((p0 + p1) / 2);
         ctx.lineCap = 'butt';
@@ -360,7 +360,7 @@
       // Dim inactive portion
       const dimStart = percentToAngle(pct);
       ctx.beginPath();
-      ctx.arc(cx, cy, radius, dimStart, 0, false);
+      ctx.arc(cx, cy, radius, dimStart, Math.PI * 2, false);
       ctx.lineWidth = trackWidth;
       ctx.strokeStyle = 'rgba(240,239,233,0.82)';
       ctx.stroke();
