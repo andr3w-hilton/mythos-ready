@@ -323,13 +323,13 @@
     function gaugeColor(pct) {
       if (pct <= 33) {
         const t = pct / 33;
-        return `rgb(${Math.round(40 + t * 200)}, ${Math.round(160 - t * 20)}, 40)`;
+        return `rgb(220, ${Math.round(t * 80)}, 0)`;
       } else if (pct <= 66) {
         const t = (pct - 33) / 33;
-        return `rgb(255, ${Math.round(140 + (1-t)*0)}, ${Math.round(20 - t*20)})`;
+        return `rgb(${Math.round(220 - t * 180)}, ${Math.round(80 + t * 100)}, 0)`;
       } else {
         const t = (pct - 66) / 34;
-        return `rgb(${Math.round(220 + t*35)}, ${Math.round(80 - t*80)}, 0)`;
+        return `rgb(${Math.round(40 - t * 10)}, ${Math.round(180 + t * 20)}, 40)`;
       }
     }
 
