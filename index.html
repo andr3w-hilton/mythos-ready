@@ -102,7 +102,7 @@
 
     /* Content */
     .card-body {
-      padding: 2rem 2rem 1.5rem;
+      padding: 1.5rem 1.5rem 1.5rem;
     }
 
     .section-label {
@@ -125,6 +125,8 @@
 
     canvas {
       display: block;
+      width: 100%;
+      height: auto;
     }
 
     /* Status readout */
@@ -266,7 +268,7 @@
       <div class="section-label">Current Assessment — Readiness Gauge</div>
 
       <div class="gauge-wrap">
-        <canvas id="gauge" width="420" height="240"></canvas>
+        <canvas id="gauge"></canvas>
       </div>
 
       <div class="readout-row">
@@ -309,12 +311,21 @@
   <script>
     const canvas = document.getElementById('gauge');
     const ctx = canvas.getContext('2d');
-    const W = canvas.width;
-    const H = canvas.height;
-    const cx = W / 2;
-    const cy = H - 20;
-    const radius = 170;
-    const trackWidth = 30;
+
+    let W, H, cx, cy, radius, trackWidth;
+
+    function sizeCanvas() {
+      const containerW = canvas.parentElement.clientWidth;
+      W = containerW;
+      H = Math.round(containerW * 0.57);
+      canvas.width = W;
+      canvas.height = H;
+      const scale = W / 420;
+      radius = Math.round(170 * scale);
+      trackWidth = Math.round(30 * scale);
+      cx = W / 2;
+      cy = H - Math.round(20 * scale);
+    }
 
     function percentToAngle(pct) {
       return Math.PI + (pct / 100) * Math.PI;
@@ -472,8 +483,14 @@
     }
 
     // Initial
+    sizeCanvas();
     const initial = Math.floor(Math.random() * 101);
     animate(0, initial, 1500, setMeta);
+
+    window.addEventListener('resize', () => {
+      sizeCanvas();
+      drawGauge(currentPct);
+    });
   </script>
 
 </body>
